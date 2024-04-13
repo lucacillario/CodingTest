@@ -5,3 +5,4 @@
 /dependencies
 /Dockerfile
 /docker-compose.yml
+/__pycache__

@@ -32,4 +32,4 @@ class ReservationShow(BaseModel):
     number_of_people: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
