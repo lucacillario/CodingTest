@@ -1,24 +1,35 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 
+Description: Coding Test for 3Bee
+
+Globals:
+  Function:
+    Timeout: 30
+
 Resources:
-  MyFastAPIFunction:
+  ApiFunction:
     Type: AWS::Serverless::Function
     Properties:
+      Handler: app.main.handler
       Runtime: python3.12
-      Handler: app.handler
-      CodeUri: ./CodingTest
-      Policies: 
-        - AmazonRDSFullAccess
+      CodeUri: ./app
       Environment:
         Variables:
-          DATABASE_HOST: ...
-          DATABASE_USER: ... 
-          DATABASE_PASSWORD: ...
-          DATABASE_NAME: ...
+          DATABASE_URL: ...
       Events:
-        MyApi:
+        ApiEvent:
           Type: Api
           Properties:
-            Path: / 
-            Method: ANY 
+            Path: /{proxy+}
+            Method: ANY
+
+  Database:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      DBName: testdb
+      Engine: mysql
+      DBInstanceClass: db.t2.micro
+      AllocatedStorage: 20
+      MasterUsername: user
+      MasterUserPassword: password
