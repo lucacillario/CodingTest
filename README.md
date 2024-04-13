@@ -2,7 +2,7 @@
 # Conference Room Booking Service
 
 ## Overview
-This microservice, developed with FastAPI and Pydantic, provides a simple conference room booking system. Users can create, view, and cancel their reservations. This service uses MySQL for data persistence and is designed to be deployed on AWS Lambda using the Serverless framework.
+This repo is created for the Coding Test
 
 ## Features
 - **Create Reservation:** Users can book a conference room by providing details such as the room name, booking name, date, and the number of people.
@@ -25,26 +25,22 @@ The API endpoints include:
 
 ## Local Setup
 ### Requirements
-- Python 3.10+
 - Docker and Docker Compose
-- FastAPI
-- SQLAlchemy
-- Pydantic
 
 ### Steps to Run Locally
 1. Clone the repository:
    ```
-   git clone <repository-url>
+   git clone https://github.com/fellarrusto/CodingTest.git
    cd CodingTest
    ```
-2. Start the MySQL database using Docker Compose:
+2. Start the application using Docker Compose:
    ```
    docker-compose up -d
    ```
    Access the API at: `http://localhost:8000`
 
 ## Testing
-Run the unit tests inside the container using:
+Run the unit tests inside the api container using:
 ```
 pytest test.py
 ```
@@ -58,10 +54,7 @@ pytest test.py
 1. Set up environment variables in `template.yml`
 
     ``` 
-    DATABASE_HOST: ...
-    DATABASE_USER: ... 
-    DATABASE_PASSWORD: ...
-    DATABASE_NAME: ...
+    DATABASE_URL: ...
     ```
 2. Package the application:
    ```
@@ -71,5 +64,3 @@ pytest test.py
    ```
    sam deploy --guided
    ```
-
-Follow the prompts to complete the deployment. Once deployed, the API will be accessible via the AWS-provided URL.
