@@ -11,9 +11,11 @@ handler = Mangum(app)
 def startup_event():
     init_db()
 
+# Endpoints
+
 @app.post("/reservations/", response_model=ReservationShow)
 def create_reservation(reservation: ReservationCreate, db: Session = Depends(get_db)):
-    db_reservation = Reservation(**reservation.dict())
+    db_reservation = Reservation(**reservation.model_dump())
     db.add(db_reservation)
     db.commit()
     db.refresh(db_reservation)
@@ -23,7 +25,7 @@ def create_reservation(reservation: ReservationCreate, db: Session = Depends(get
 def read_reservations(db: Session = Depends(get_db)):
     return db.query(Reservation).all()
 
-@app.post("/reservations/by-name", response_model=list[ReservationShow])
+@app.get("/reservations/by-name", response_model=list[ReservationShow])
 def read_reservations_by_name(request: BookerName, db: Session = Depends(get_db)):
     booker_name = request.booker_name
     reservations = db.query(Reservation).filter(Reservation.booker_name == booker_name).all()

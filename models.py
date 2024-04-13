@@ -1,6 +1,5 @@
-from sqlalchemy import create_engine, Column, Integer, String, Date, ForeignKey
+from sqlalchemy import create_engine, Column, Integer, String, Date
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker, relationship
 from pydantic import BaseModel
 from datetime import date
 
@@ -14,10 +13,11 @@ class Reservation(Base):
     date = Column(Date)
     number_of_people = Column(Integer)
 
+
+# Data validation
 class BookerName(BaseModel):
     booker_name: str
 
-# Pydantic models for data validation
 class ReservationCreate(BaseModel):
     room_name: str
     booker_name: str
@@ -30,6 +30,3 @@ class ReservationShow(BaseModel):
     booker_name: str
     date: date
     number_of_people: int
-
-    class Config:
-        from_attributes = True
