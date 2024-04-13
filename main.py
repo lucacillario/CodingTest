@@ -1,21 +1,15 @@
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
 from models import Reservation, ReservationCreate, ReservationShow, BookerName
-from database import SessionLocal, init_db
+from database import init_db, get_db
+from mangum import Mangum
 
 app = FastAPI()
-# handler = Mangum(app)
+handler = Mangum(app)
 
 @app.on_event("startup")
 def startup_event():
     init_db()
-
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 @app.post("/reservations/", response_model=ReservationShow)
 def create_reservation(reservation: ReservationCreate, db: Session = Depends(get_db)):

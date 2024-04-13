@@ -11,12 +11,12 @@ services:
       MYSQL_USER: user
       MYSQL_PASSWORD: password
     ports:
-      - "3307:3306"  # Changed host port to 3307
+      - "3307:3306"
     restart: always
 
   app:
     build:
-      context: ./app
+      context: .
       dockerfile: Dockerfile
     ports:
       - "8000:8000"
