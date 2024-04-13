@@ -5,9 +5,9 @@ Resources:
   MyFastAPIFunction:
     Type: AWS::Serverless::Function
     Properties:
-      Runtime: python3.10 
+      Runtime: python3.12
       Handler: app.handler
-      CodeUri: ./CodingTest 
+      CodeUri: ./CodingTest
       Policies: 
         - AmazonRDSFullAccess
       Environment:

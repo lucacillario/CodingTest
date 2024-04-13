@@ -4,3 +4,4 @@
 .dependencies/
 /dependencies
 /__pycache__
+/.aws-sam
