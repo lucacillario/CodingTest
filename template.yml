@@ -1,17 +1,24 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
+
 Resources:
-  FastApiApp:
+  MyFastAPIFunction:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: app.lambda_handler
-      Runtime: python3.10
-      CodeUri: .
-      MemorySize: 512
-      Timeout: 100
+      Runtime: python3.10 
+      Handler: app.handler
+      CodeUri: ./CodingTest 
+      Policies: 
+        - AmazonRDSFullAccess
+      Environment:
+        Variables:
+          DATABASE_HOST: ...
+          DATABASE_USER: ... 
+          DATABASE_PASSWORD: ...
+          DATABASE_NAME: ...
       Events:
-        Api:
+        MyApi:
           Type: Api
           Properties:
-            Path: /{proxy+}
-            Method: ANY
+            Path: / 
+            Method: ANY 

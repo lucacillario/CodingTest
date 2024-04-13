@@ -3,6 +3,4 @@
 .__pycache__/
 .dependencies/
 /dependencies
-/Dockerfile
-/docker-compose.yml
 /__pycache__
